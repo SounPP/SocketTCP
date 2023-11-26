@@ -8,42 +8,43 @@
 #include <unistd.h>
 #define PORT_NUM 8080 
 int main() {
-    int fd_socket; 
+    int server_socket; 
+    int client_socket; 
     // creating address for our sever 
-    struct sockaddr_in sever_address; 
+    struct sockaddr_in server_address, clinet_address; 
     memset(&sever_address, 0, sizeof(sever_address)); 
     // socket for the sever 
-    fd_socket = socket(AF_INET, SOCK_STREAM, 0);  
+    server_socket = socket(AF_INET, SOCK_STREAM, 0);  
     
-    if (fd_socket < 0) {
+    if (server_socket < 0) {
     
          perror("Error coudln't create a socket"); 
 	 exit(EXIT_FAILURE); 
     }
     // confing our address sever 
-    sever_address.sin_family = AF_INET; 
-    sever_address.sin_addr.s_addr = INADDR_ANY; 
-    sever_address.sin_port = htons(PORT_NUM); 
+    server_address.sin_family = AF_INET; 
+    server_address.sin_addr.s_addr = INADDR_ANY; 
+    server_address.sin_port = htons(PORT_NUM); 
 
     // Binding our sever 
-    if (bind(fd_socket, (struct sockaddr*)&sever_address, sizeof(sever_address)) < 0) {
+    if (bind(server_socket, (struct sockaddr*)&server_address, sizeof(server_address)) < 0) {
     
-         printf("Socket Binding failed"); 
+        printf("Socket Binding failed"); 
 	 perror("Error binding"); 
 	 exit(EXIT_FAILURE); 
     
     }
     printf("Socket binding to PORT: %d", PORT_NUM);
     // Listen for the connection forom client 
-    if (listen(fd_socket, 10) < 0) {
+    if (listen(server_socket , 10) < 0) {
         perror("Listen failed"); 
-	close(fd_socket); 
+	close(server_socket); 
 	exit(EXIT_FAILURE); 
     
     
     }
     printf("Listening for the conenction form PORT: %d", PORT_NUM); 
-    connect(fd_socket, (struct sockaddr*)&sever_address, sizeof(sever_address));
-   close(fd_socket);  
+    connect(server_socket, (struct sockaddr*)&server_address, sizeof(server_address));
+   close(sever_socket);  
     return 0; 
 }
