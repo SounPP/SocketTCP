@@ -13,6 +13,11 @@ int main() {
     struct sockaddr_in client_address; 
     memset(&client_address, 0, sizeof(client_address)); 
     // socket for the Clinet 
-    fd_client = socket(AF_INET, SOCK_STREAM, 0);  
+    fd_client = socket(AF_INET, SOCK_STREAM, 0);
+    // socket client   
+    if (fd_client = -1) {
+         perror("Couldn't create a Socket"); 
+	 exit(EXIT_FAILURE); 
+    }
     return 0; 
 } 
