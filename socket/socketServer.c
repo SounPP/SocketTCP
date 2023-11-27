@@ -43,8 +43,24 @@ int main() {
     
     
     }
-    printf("Listening for the conenction form PORT: %d", PORT_NUM); 
-    connect(server_socket, (struct sockaddr*)&server_address, sizeof(server_address));
-   close(sever_socket);  
+    printf("Listening for the conenction form PORT: %d\n", PORT_NUM);
+    // accpeted the client throught the clinet socekt with the client sever addrss 
+   if (client_socket = accept(server_socket, (struct addr*)&client_address, &client_address_len) == -1 ) {
+         perror("Connecting to accpit failed"); 
+	 exit(EXIT_FAILURE); 
+   
+   
+   } 
+   // Reciving data form client 
+   recv(client_socket, message, sizeof(message), 0); 
+   printf("Reciving form clinet: %s", message); 
+
+   // send a reponece back to the clinet
+   strcpy(message, "Hello, You Connected to AT&T net service:)"); 
+   send(client_socket, message, strlen(message), 0); 
+   printf("Sent to client %s",message); 
+   close(cilent_socket); 
+   close(server_socket);
+
     return 0; 
 }

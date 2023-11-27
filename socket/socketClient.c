@@ -6,7 +6,8 @@
 #include <netinet/in.h> 
 #include <arpa/inet.h> 
 #include <unistd.h>
-#define PORT_NUM 8080 
+#define SERVER_IP "127.0.0.1"
+#define SERVER_PORT 8080
 int main() {
     int fd_client; 
     // creating address for our Client 
@@ -19,5 +20,15 @@ int main() {
          perror("Couldn't create a Socket"); 
 	 exit(EXIT_FAILURE); 
     }
+    server_address.sin_family = AF_INET; 
+    server_address.sin_port = htons(SERVER_PORT);
+    inet_pton(AF_INET, SERVER_IP< &server_address.sin_addr); 
+    // connect to the sever 
+    if (connect(client_socket, (struct sockaddr*)&sever_address, &server_address_len) == -1 ) {
+         perror("Connetiong failed to connect to the server"); 
+	 exit(EXIT_FAILURE); 
+    
+    
+    }  
     return 0; 
 } 
