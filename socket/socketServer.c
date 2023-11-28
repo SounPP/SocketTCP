@@ -12,7 +12,7 @@ int main() {
     int client_socket; 
     // creating address for our sever 
     struct sockaddr_in server_address, clinet_address; 
-    memset(&sever_address, 0, sizeof(sever_address)); 
+    memset(&server_address, 0, sizeof(sever_address)); 
     // socket for the sever 
     server_socket = socket(AF_INET, SOCK_STREAM, 0);  
     
@@ -45,7 +45,7 @@ int main() {
     }
     printf("Listening for the conenction form PORT: %d\n", PORT_NUM);
     // accpeted the client throught the clinet socekt with the client sever addrss 
-   if (client_socket = accept(server_socket, (struct addr*)&client_address, &client_address_len) == -1 ) {
+   if (client_socket = accept(server_socket, (struct addr*)&clinet_address, &clinet_address_len) == -1 ) {
          perror("Connecting to accpit failed"); 
 	 exit(EXIT_FAILURE); 
    
@@ -59,7 +59,7 @@ int main() {
    strcpy(message, "Hello, You Connected to AT&T net service:)"); 
    send(client_socket, message, strlen(message), 0); 
    printf("Sent to client %s",message); 
-   close(cilent_socket); 
+   close(client_socket); 
    close(server_socket);
 
     return 0; 
