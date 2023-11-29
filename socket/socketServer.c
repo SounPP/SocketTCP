@@ -10,6 +10,7 @@
 #define PORT_NUM 8080
 
 int main() {
+    char buffer[2000];
     int server_socket, client_socket;
     // creating address for our server
     struct sockaddr_in server_address, client_address;
@@ -56,8 +57,16 @@ int main() {
     printf("Connection accepted from %s:%d\n", inet_ntoa(client_address.sin_addr), ntohs(client_address.sin_port));
 
     // Now you can communicate with the client using the 'client_socket'
+    ssize_t bytes = recv(client_socket, buffer, sizeof(buffer), 0);
+    if (bytes == -1 ) {
+         perror("Error message failed to recv:("); 
 
-    // Close sockets
+    } else {
+        buffer[bytes] = '\0'; 
+	printf("Recv messgae form the clinet: %s\n", buffer); 
+    
+    }
+    //Close sockets
     close(client_socket);
     close(server_socket);
 

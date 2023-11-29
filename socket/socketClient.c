@@ -12,6 +12,7 @@
 int main() {
     int client_socket;
     struct sockaddr_in server_address;
+    char message[] = "Hello nigger!"; 
 
     // Create a socket for the client
     client_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -33,7 +34,7 @@ int main() {
 
     printf("Connected to the server.\n");
 
-    // Now you can send and receive data with the server using 'client_socket'
+    send(client_socket, message, strlen(message), 0); 
 
     // Close the socket
     close(client_socket);
