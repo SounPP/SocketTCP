@@ -12,7 +12,7 @@
 int main() {
     int client_socket;
     struct sockaddr_in server_address;
-    char message[] = "Hello nigger!"; 
+    char message[] = "Hello User form the DAYATA CORE:)"; 
 
     // Create a socket for the client
     client_socket = socket(AF_INET, SOCK_STREAM, 0);
